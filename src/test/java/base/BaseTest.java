@@ -9,10 +9,11 @@ import org.testng.annotations.BeforeClass;
 import static com.codeborne.selenide.Selenide.*;
 
 public class BaseTest {
+    public String baseUrl = "https://qatest-dev.indvp.com/";
 
     @BeforeClass
     public void setUp() {
-        Configuration.baseUrl = "https://demo.automationtesting.in/Register.html";
+        Configuration.baseUrl = baseUrl;
         Configuration.timeout = 10000;
         Configuration.browser = "firefox"; // Change this configuration to use a different browser
         open(Configuration.baseUrl);
