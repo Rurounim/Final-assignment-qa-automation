@@ -5,6 +5,8 @@
         <classes>
             <class name="tests.LoginTest">
             </class>
+            <class name="tests.HomeDecorTest">
+            </class>
         </classes>
     </test>
 </suite>
