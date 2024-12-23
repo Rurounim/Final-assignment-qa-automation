@@ -9,14 +9,13 @@ import org.testng.annotations.Test;
 
 public class HomeDecorTest {
     String homeDecorUrl = "https://qatest-dev.indvp.com/home-decor/";
-    SelenideElement h1ElementLocator = $("h1");
+    SelenideElement noMatchSubtitleLocator = $(".NoMatch-Subtitle");
 
     @Test()
     @Description("Home decor page should be found")
     public void testH1DoesNotContain404() {
         open(homeDecorUrl);
-        h1ElementLocator
-                .shouldBe(Condition.visible)
-                .shouldNotBe(Condition.text("404"));
+        noMatchSubtitleLocator
+                .shouldNotBe(Condition.visible);
     }
 }

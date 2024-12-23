@@ -4,7 +4,7 @@ import com.codeborne.selenide.SelenideElement;
 import static com.codeborne.selenide.Selenide.*;
 import io.qameta.allure.Step;
 
-public class HomePage {
+public class LoginWindow {
     protected final SelenideElement signInButtonLocator = $("button[aria-label='Open my account']");
     protected SelenideElement emailFieldLocator = $("input[name='email']");
     protected SelenideElement passwordFieldLocator = $("input[name='password']");

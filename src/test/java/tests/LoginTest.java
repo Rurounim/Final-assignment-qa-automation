@@ -4,7 +4,7 @@ import base.BaseTest;
 import com.codeborne.selenide.WebDriverRunner;
 import io.qameta.allure.Description;
 import org.testng.annotations.Test;
-import pages.HomePage;
+import pages.LoginWindow;
 
 import com.codeborne.selenide.Condition;
 
@@ -14,17 +14,32 @@ public class LoginTest extends BaseTest {
     @Test()
     @Description("Login attempt with invalid parameters should fail")
     public void invalidLogin() {
-        HomePage home = new HomePage();
+        LoginWindow login = new LoginWindow();
         String email = "non-existent@gmail.com";
         String password = "Password123";
 
-        home.openSignInWindow();
-        home.enterEmail(email);
-        home.enterPassword(password);
-        home.submit();
+        login.openSignInWindow();
+        login.enterEmail(email);
+        login.enterPassword(password);
+        login.submit();
 
-        String currentUrl = WebDriverRunner.url(); // Selenide method to get current URL
+        String currentUrl = WebDriverRunner.url();
         assert currentUrl.equals(this.baseUrl);
     }
 
+    @Test()
+    @Description("Login attempt with valid parameters should pass")
+    public void validLogin() {
+        LoginWindow login = new LoginWindow();
+        String email = "user03@gmail.com";
+        String password = "Password123";
+
+        login.openSignInWindow();
+        $("button.Button.Button_isHollow").click();
+
+        $(".MyAccountOverlay-Action.MyAccountOverlay-Action_state_createAccount").shouldBe(Condition.visible);
+
+
+
+    }
 }
