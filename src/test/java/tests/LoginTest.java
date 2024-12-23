@@ -7,8 +7,10 @@ import org.testng.annotations.Test;
 import pages.LoginWindow;
 
 import com.codeborne.selenide.Condition;
+import pages.RegisterWindow;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.webdriver;
 
 public class LoginTest extends BaseTest {
     @Test()
@@ -28,8 +30,9 @@ public class LoginTest extends BaseTest {
     }
 
     @Test()
-    @Description("Login attempt with valid parameters should pass")
+    @Description("Users should be logged in after successfully creating a new account")
     public void validLogin() {
+        String dashboardUrl = "https://qatest-dev.indvp.com/my-account/dashboard";
         LoginWindow login = new LoginWindow();
         String email = "user03@gmail.com";
         String password = "Password123";
@@ -39,7 +42,18 @@ public class LoginTest extends BaseTest {
 
         $(".MyAccountOverlay-Action.MyAccountOverlay-Action_state_createAccount").shouldBe(Condition.visible);
 
+        // Register a user
+        RegisterWindow register = new RegisterWindow();
+        register.enterFirstName("Mariam");
+        register.enterLastName("Mmmmir");
+        register.enterEmail(email);
+        register.enterPass(password);
+        register.confirmPass(password);
 
+        $("button[type='submit']").click();
+
+        String currentUrl = WebDriverRunner.url();
+        assert currentUrl.equals(dashboardUrl);
 
     }
 }
